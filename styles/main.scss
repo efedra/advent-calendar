@@ -139,7 +139,7 @@ body {
 }
 
 .card {
-  //display: none;
+  display: none;
   position: relative;
   font-family: Rubik;
   height: fit-content;
@@ -296,7 +296,7 @@ body {
   display: none;
   z-index: 1;
   position: fixed;
-  background: white;
+  background: aliceblue;
   width: 100vw;
   height: 100vh;
   justify-content: center;
@@ -388,7 +388,11 @@ body {
   .flag-number{
     font-size: 2vw;
   }
+  .checkbox__card label{
+    padding: 6px 19px;
+  }
 }
+
 @media (max-width: 700px) {
   body{
     display: block;
@@ -411,9 +415,5 @@ body {
   .card-modal{
     width: 90%;
   }
-}
-@media (max-width: 340px) {
-  .checkbox__card label{
-    padding: 6px 19px;
-  }
+ 
 }
