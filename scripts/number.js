@@ -8,28 +8,74 @@ nowDay = nowDay > 30 ? 30 : nowDay;
 document.getElementById('nowDay').innerText = nowDay;
 
 
+function readCookie(nameC) {
+    let opensCookie;
+    document.cookie.split('; ').forEach(el => {
+        const [name, value] = el.split('=');
+        if (name === nameC) {
+            opensCookie = value;
+        }
+    });
+    if (opensCookie) {
+        return JSON.parse(opensCookie);
+    }
+    else{
+        return [];
+    }
 
+}
+
+function writeCooke(name, neededNumber, arr) {
+    if (isUnique(neededNumber, opens)) {
+        arr.push(neededNumber);
+    }
+
+    const expirationDate = new Date();
+    expirationDate.setMonth(expirationDate.getMonth() + 11);
+    const opensString = JSON.stringify(arr);
+    document.cookie = `${name}=${opensString}; expires=${expirationDate.toUTCString()}`;
+}
+function deleteCookie(name,elem){
+    let cookies = readCookie(name)
+
+    // Находим индекс элемента в массиве
+    const index = cookies.indexOf(elem);
+
+    // Если элемент найден, удаляем его из массива
+    if (index !== -1) {
+        cookies.splice(index, 1);
+    }
+
+    // Обновляем куку с новыми значениями
+    const expirationDate = new Date();
+    expirationDate.setMonth(expirationDate.getMonth() + 11);
+    const cookiesString = JSON.stringify(cookies);
+    document.cookie = `${name}=${cookiesString}; expires=${expirationDate.toUTCString()}`;
+}
 function isUnique(value, array) {
     return !array.includes(value);
 }
-function finCookie(nameC){
-    document.cookie.split('; ').forEach(el=>{
+
+function finCookie(nameC) {
+    document.cookie.split('; ').forEach(el => {
         const [name, value] = el.split('=');
         if (name === nameC) {
             opensCookie = value;
         }
     });
 }
+let done= readCookie('done');
+done.forEach(el=>{
+    document.getElementById(el).checked = true;
+})
 
-let opensCookie;
+let opensCookie = readCookie('opens');
 finCookie('opens')
-
-
 
 
 if (opensCookie) {
     opens = JSON.parse(opensCookie);
-    opens.forEach(el=>{
+    opens.forEach(el => {
         document.querySelector(`.card[data-number="${el}"]`).style.display = 'block'
     })
 }
@@ -46,7 +92,7 @@ numbers.forEach(el => {
                 neededNumberElem.classList.add('card-modal')
                 neededNumberElem.querySelector('.card__snow').classList.add('card__snow_modal')
 
-                document.body.style.overflowY='hidden'
+                document.body.style.overflowY = 'hidden'
                 //куки
                 let opens = [];
                 finCookie('opens')
@@ -58,7 +104,6 @@ numbers.forEach(el => {
                 }
 
 
-// Обновляем куку с новыми значениями
                 const expirationDate = new Date();
                 expirationDate.setMonth(expirationDate.getMonth() + 11);
                 const opensString = JSON.stringify(opens);
@@ -73,20 +118,30 @@ modal.addEventListener('click', (e) => {
         modal.removeChild(neededNumberElem)
         modal.style.display = "none";
         neededNumberElem = null;
-
-        document.body.style.overflowY='auto'
+        document.body.style.overflowY = 'auto'
     }
 
-    if (e.target.type === 'checkbox') {
-        let id = modal.querySelector('input').id
-        const checkboxes = document.querySelectorAll(`input[name=${id}]`);
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = e.target.checked;
-        });
-    }
+
 })
 
 
+document.addEventListener('click',(e)=>{
+    if (e.target.type === 'checkbox') {
+
+        let id =  e.target.closest('.checkbox__card').querySelector('input').id
+        const checkboxes = document.querySelectorAll(`input[name=${id}]`);
+
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = e.target.checked;
+            if (checkbox.checked) {
+                writeCooke('done',id,done)
+            }
+            else{
+                deleteCookie('done',id)
+            }
+        });
+    }
+})
 
 
 
