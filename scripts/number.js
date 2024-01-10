@@ -91,7 +91,6 @@ numbers.forEach(el => {
                 modal.appendChild(neededNumberElem);
                 neededNumberElem.classList.add('card-modal')
                 neededNumberElem.querySelector('.card__snow').classList.add('card__snow_modal')
-
                 document.body.style.overflowY = 'hidden'
                 //куки
                 let opens = readCookie('opens');
