@@ -18,24 +18,29 @@ function readCookie(nameC) {
     });
     if (opensCookie) {
         return JSON.parse(opensCookie);
-    }
-    else{
+    } else {
         return [];
     }
 
 }
 
 function writeCooke(name, neededNumber, arr) {
-    if (isUnique(neededNumber, opens)) {
+    if (isUnique(neededNumber, arr)) {
         arr.push(neededNumber);
     }
 
     const expirationDate = new Date();
-    expirationDate.setMonth(expirationDate.getMonth() + 11);
+    if (expirationDate.getMonth() === 11) {
+        expirationDate.setFullYear(expirationDate.getFullYear() + 1);
+
+    }
+    expirationDate.setMonth(10);
+    expirationDate.setDate(30);
     const opensString = JSON.stringify(arr);
     document.cookie = `${name}=${opensString}; expires=${expirationDate.toUTCString()}`;
 }
-function deleteCookie(name,elem){
+
+function deleteCookie(name, elem) {
     let cookies = readCookie(name)
 
     // Находим индекс элемента в массиве
@@ -48,37 +53,32 @@ function deleteCookie(name,elem){
 
     // Обновляем куку с новыми значениями
     const expirationDate = new Date();
-    expirationDate.setMonth(expirationDate.getMonth() + 11);
-    const cookiesString = JSON.stringify(cookies);
-    document.cookie = `${name}=${cookiesString}; expires=${expirationDate.toUTCString()}`;
+    if (expirationDate.getMonth() === 11) {
+        expirationDate.setFullYear(expirationDate.getFullYear() + 1);
+
+    }
+    expirationDate.setMonth(10);
+    expirationDate.setDate(30);
+    const opensString = JSON.stringify(arr);
+    document.cookie = `${name}=${opensString}; expires=${expirationDate.toUTCString()}`;
 }
+
 function isUnique(value, array) {
     return !array.includes(value);
 }
 
-function finCookie(nameC) {
-    document.cookie.split('; ').forEach(el => {
-        const [name, value] = el.split('=');
-        if (name === nameC) {
-            opensCookie = value;
-        }
-    });
-}
-let done= readCookie('done');
-done.forEach(el=>{
+
+let done = readCookie('done');
+done.forEach(el => {
     document.getElementById(el).checked = true;
 })
 
-let opensCookie = readCookie('opens');
-finCookie('opens')
+let opens = readCookie('opens');
 
 
-if (opensCookie) {
-    opens = JSON.parse(opensCookie);
-    opens.forEach(el => {
-        document.querySelector(`.card[data-number="${el}"]`).style.display = 'block'
-    })
-}
+opens.forEach(el => {
+    document.querySelector(`.card[data-number="${el}"]`).style.display = 'block'
+})
 
 
 numbers.forEach(el => {
@@ -94,20 +94,8 @@ numbers.forEach(el => {
 
                 document.body.style.overflowY = 'hidden'
                 //куки
-                let opens = [];
-                finCookie('opens')
-                if (opensCookie) {
-                    opens = JSON.parse(opensCookie);
-                }
-                if (isUnique(neededNumber, opens)) {
-                    opens.push(neededNumber);
-                }
-
-
-                const expirationDate = new Date();
-                expirationDate.setMonth(expirationDate.getMonth() + 11);
-                const opensString = JSON.stringify(opens);
-                document.cookie = `opens=${opensString}; expires=${expirationDate.toUTCString()}`;
+                let opens = readCookie('opens');
+                writeCooke('opens', neededNumber, opens)
             }
         )
     }
@@ -120,24 +108,21 @@ modal.addEventListener('click', (e) => {
         neededNumberElem = null;
         document.body.style.overflowY = 'auto'
     }
-
-
 })
 
 
-document.addEventListener('click',(e)=>{
+document.addEventListener('click', (e) => {
     if (e.target.type === 'checkbox') {
 
-        let id =  e.target.closest('.checkbox__card').querySelector('input').id
+        let id = e.target.closest('.checkbox__card').querySelector('input').id
         const checkboxes = document.querySelectorAll(`input[name=${id}]`);
 
         checkboxes.forEach(checkbox => {
             checkbox.checked = e.target.checked;
             if (checkbox.checked) {
-                writeCooke('done',id,done)
-            }
-            else{
-                deleteCookie('done',id)
+                writeCooke('done', id, done)
+            } else {
+                deleteCookie('done', id)
             }
         });
     }
