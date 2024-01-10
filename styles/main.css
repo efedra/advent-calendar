@@ -18,6 +18,42 @@ h1, h2, h3, h4, h5, h6 {
   font-size: inherit;
 }
 
+.snow, .snow:after, .snow:before {
+  position: absolute;
+  content: "";
+  background-size: 650px 650px;
+  top: -650px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  background-image: radial-gradient(4px 4px at 100px 50px, #fff, transparent), radial-gradient(6px 6px at 200px 150px, #fff, transparent), radial-gradient(3px 3px at 300px 250px, #fff, transparent), radial-gradient(4px 4px at 400px 350px, #fff, transparent), radial-gradient(6px 6px at 500px 100px, #fff, transparent), radial-gradient(3px 3px at 50px 200px, #fff, transparent), radial-gradient(4px 4px at 150px 300px, #fff, transparent), radial-gradient(6px 6px at 250px 400px, #fff, transparent), radial-gradient(3px 3px at 350px 500px, #fff, transparent);
+  animation: snowAnim 3s linear;
+  animation-iteration-count: infinite;
+}
+
+.snow:after {
+  margin-left: -250px;
+  opacity: 0.5;
+  filter: blur(2px);
+  animation-direction: reverse;
+  animation-duration: 6s;
+}
+
+.snow:before {
+  margin-left: -350px;
+  opacity: 0.7;
+  filter: blur(1px);
+}
+
+@keyframes snowAnim {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(650px);
+  }
+}
 .background-left {
   width: 100%;
 }
@@ -35,6 +71,7 @@ body {
 }
 
 .title-month-year {
+  z-index: 2;
   position: absolute;
   right: 11px;
   top: 1%;
@@ -298,6 +335,8 @@ body {
   width: 35%;
   max-width: 600px;
   cursor: default;
+  max-height: 95%;
+  overflow: hidden;
 }
 
 .card__snow_modal {
@@ -338,6 +377,25 @@ body {
 
 .card__img_width {
   width: 105%;
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: white;
+}
+
+audio::-webkit-media-controls-timeline {
+  background-color: #B1D4E0;
+  display: none;
+}
+
+audio::-webkit-media-controls-volume-slider {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+audio {
+  position: absolute;
+  z-index: 1;
 }
 
 @media (max-width: 1400px) {

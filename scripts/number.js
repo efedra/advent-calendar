@@ -59,8 +59,8 @@ function deleteCookie(name, elem) {
     }
     expirationDate.setMonth(10);
     expirationDate.setDate(30);
-    const opensString = JSON.stringify(arr);
-    document.cookie = `${name}=${opensString}; expires=${expirationDate.toUTCString()}`;
+    const cookiesString = JSON.stringify(cookies);
+    document.cookie = `${name}=${cookiesString}; expires=${expirationDate.toUTCString()}`;
 }
 
 function isUnique(value, array) {
