@@ -1,5 +1,8 @@
+
 const audioPlayer = document.querySelector(".audio-player");
-const audio = document.getElementById("winnerAudio");
+const audio = new Audio(
+    "../audio/RAMIN-SNOW.mp3"
+);
 
 audio.addEventListener("loadeddata", () => {
         audio.volume = 0.04;
