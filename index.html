@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Advent</title>
 
+    <title>Advent</title>
     <link href="./styles/adaptive-fonts.css" rel="stylesheet">
     <link href="./styles/main.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -17,7 +18,23 @@
 
 </div>
 <nav class="nav">
-    <audio preload  controls controlsList="nodownload noplaybackrate" src="./RAMIN%20-%20Снег%20не%20тает.mp3"></audio>
+    <div class="audio-player">
+        <div class="controls">
+            <div class="play-container">
+                <img class ="fa-play active" src="./images/play.svg"/>
+                <img class ="fa-pause" src="./images/pause.svg"/>
+            </div>
+            <div class="volume-container">
+                <div class="volume-button">
+                    <div class="volume icono-volumeMedium"></div>
+                </div>
+
+<!--                <div class="volume-slider">-->
+<!--                    <div class="volume-percentage"></div>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
     <img class="background-left" src="images/bg.png">
     <div class="title-month-year">ДЕКАБРЬ 2023</div>
     <img class="flag flag_1" src="images/flag.svg">
@@ -1371,5 +1388,6 @@
 </div>
 
 <script src="scripts/number.js"></script>
+<script src="scripts/audio.js"></script>
 </body>
 </html>
