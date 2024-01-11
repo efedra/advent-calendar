@@ -1,6 +1,6 @@
 const audioPlayer = document.querySelector(".audio-player");
 const audio = new Audio(
-    "../RAMIN-SNOW.mp3"
+    "../audio/RAMIN-SNOW.mp3"
 );
 
 audio.addEventListener("loadeddata", () => {
