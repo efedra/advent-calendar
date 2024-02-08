@@ -23,7 +23,6 @@ function readCookie(nameC) {
     }
 
 }
-
 function writeCooke(name, neededNumber, arr) {
     if (isUnique(neededNumber, arr)) {
         arr.push(neededNumber);
@@ -39,7 +38,6 @@ function writeCooke(name, neededNumber, arr) {
     const opensString = JSON.stringify(arr);
     document.cookie = `${name}=${opensString}; expires=${expirationDate.toUTCString()}`;
 }
-
 function deleteCookie(name, elem) {
     let cookies = readCookie(name)
 

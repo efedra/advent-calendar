@@ -27,13 +27,13 @@ h1, h2, h3, h4, h5, h6 {
   pointer-events: none;
   position: absolute;
   content: "";
-  background-size: 650px 650px;
+  background-size: 650px 650px; // ширина и высота
   top: -650px;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 3;
-  background-image:
+  background-image: //Градиент будет иметь радиус 4 пикселя, начиная с точки координат (100px, 50px). Цвет фона будет белым (#fff), а прозрачность будет увеличиваться по мере удаления от центра градиента.
           radial-gradient(4px 4px at 100px 50px, #fff, transparent),
           radial-gradient(6px 6px at 200px 150px, #fff, transparent),
           radial-gradient(3px 3px at 300px 250px, #fff, transparent),
