@@ -1,7 +1,7 @@
 
 const audioPlayer = document.querySelector(".audio-player");
 const audio = new Audio(
-    "https://github.com/efedra/advent-calendar/blob/main/audio/RAMIN-SNOW.mp3"
+    "../audio/compress.mp3"
 );
 
 audio.addEventListener("loadeddata", () => {
